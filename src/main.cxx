@@ -26,6 +26,8 @@
  *
  */
 
+/* Something interesting. */
+
 
 #include <iostream>   // Provides cout, cin
 #ifdef __Darwin__
