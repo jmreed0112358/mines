@@ -710,6 +710,7 @@ int play_game( int**& data, int**& mask, int row, int col, int n )
                  else
                  {
                     cout << "You cannot place a flag here!" << endl;
+		    break;
                  }
               }
               break;
