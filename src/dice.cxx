@@ -1,31 +1,11 @@
-//File:    $Id$
-//Author: Jeremy Reed
-//Date:
+//File:   dice.cxx
+//Author: Jeremy Reed 
+//Date:   5-26-2008
 //Contributors: NONE
 //Purpose:
 //Revisions:
 //
 //         $Log$
-// COPYRIGHT:
-/*
- *
- * Copyright (c) 2011, Jeremy M. Reed
- * All rights reserved.
- *
- *
- * THIS SOFTWARE IS PROVIDED BY Jeremy M Reed ''AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL Jeremy M. Reed BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- */
-
 
 #include <iostream>
 #include "dice.h"
@@ -56,6 +36,8 @@ namespace DICE
       cout << "dice::~dice() called." << endl << endl;
    }
 
+/////////////////////////////////////////////////////////////////////
+
    int
    dice::roll( int N )
    {
@@ -71,6 +53,8 @@ namespace DICE
       }
       return( result );
    }
+
+/////////////////////////////////////////////////////////////////////
 
    int
    dice::roll( int N, int X )
@@ -91,6 +75,8 @@ namespace DICE
       }
       return( result ); 
    }
+
+/////////////////////////////////////////////////////////////////////
 
    int
    dice::roll_range( int start, int end )

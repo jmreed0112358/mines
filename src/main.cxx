@@ -60,7 +60,7 @@ using namespace std;
 using namespace DICE;
 
 //-----------------------------------------------------------------------------
-// PROTOTYPES of functions used in this test program:
+// PROTOTYPES of functions used in this program:
 
 int clear_square( int** data, int** mask, int row, int col, int x, int y );
 // Preconditions: row and col must be positive.  x and y must be postive, 
@@ -163,6 +163,7 @@ int make_dynamic_array( int**& data, int row, int col );
 
 
 // **************************************************************************
+// Credit for these new/delete replacements:  Professor Main.
 // Replacements for new and delete:
 // The next two functions replace the new and delete operators. Any code
 // that is linked with this .cxx file will use these replacements instead
@@ -518,129 +519,59 @@ int place_mines( dice* die, int**& data, int row, int col, int n )
    // Check sparseness of minefield.
    cout << "Percentage mined: " << setprecision( 3 ) << z  << " %" << endl;
   
-   //if ( z < 0.5 )
-   if ( true )
+   // Initialize data to 0, randomly insert mines.
+   for ( int i = 0 ; i != n ; i++ )
    {
-      // Initialize data to 0, randomly insert mines.
-      for ( int i = 0 ; i != n ; i++ )
+      do
       {
-         do
-         {
-            x = ( die->roll( col ) ) - 1;
-            y = ( die->roll( row ) ) - 1;
-            r = r + 1;
-         }
-         while( (int) data[y][x] == -1 );
+         x = ( die->roll( col ) ) - 1;
+         y = ( die->roll( row ) ) - 1;
+         r = r + 1;
+      }
+      while( (int) data[y][x] == -1 );
 
-         data[y][x] = -1;
+      data[y][x] = -1;
 
-         if ( y != ( row - 1 ) && ( data[y+1][x] != -1 ) )  
-         {
-            (data[y+1][x])++;
-         }
+      if ( y != ( row - 1 ) && ( data[y+1][x] != -1 ) )  
+      {
+         (data[y+1][x])++;
+      }
 
-         if ( y != 0  && ( data[y-1][x] != -1 ) )
-         {
-            (data[y-1][x])++;
-         }
+      if ( y != 0  && ( data[y-1][x] != -1 ) )
+      {
+         (data[y-1][x])++;
+      }
 
-         if ( x != ( col - 1 )  && ( data[y][x+1] != -1 ) )
-         {
-            (data[y][x+1])++;
-         }
+      if ( x != ( col - 1 )  && ( data[y][x+1] != -1 ) )
+      {
+         (data[y][x+1])++;
+      }
 
-         if ( x != 0  && ( data[y][x-1] != -1 ) )
-         {
-            (data[y][x-1])++;
-         }
+      if ( x != 0  && ( data[y][x-1] != -1 ) )
+      {
+         (data[y][x-1])++;
+      }
 
-         if ( ( y != ( row - 1 ) ) && ( x != ( col - 1 ) )  
-              && ( data[y+1][x+1] != -1 ) )
-         {
-            (data[y+1][x+1])++;
-         }
+      if ( ( y != ( row - 1 ) ) && ( x != ( col - 1 ) )  
+           && ( data[y+1][x+1] != -1 ) )
+      {
+         (data[y+1][x+1])++;
+      }
  
-         if ( ( y != ( row -1 ) ) && ( x != 0 )  && ( data[y+1][x-1] != -1 ) )
-         {
-            (data[y+1][x-1])++;
-         }
-
-         if ( ( y != 0 ) && ( x != ( col -1 ) )  && ( data[y-1][x+1] != -1 ) )
-         {
-            (data[y-1][x+1])++;
-         }
-
-         if ( ( y != 0 ) && ( x != 0 )  && ( data[y-1][x-1] != -1 ) )
-         {
-            (data[y-1][x-1])++;
-         } 
-      }
-   } 
-   else
-   {
-      // Initialize data to -1, randomly insert spaces.
-      for ( int i = 0 ; i != row ; i++ )
+      if ( ( y != ( row -1 ) ) && ( x != 0 )  && ( data[y+1][x-1] != -1 ) )
       {
-         for ( int j = 0 ; j != col ; j++ )
-         {
-            data[i][j] = -1;
-         }
+         (data[y+1][x-1])++;
       }
 
-      for ( int i = 0 ; i != n ; i++ )
+      if ( ( y != 0 ) && ( x != ( col -1 ) )  && ( data[y-1][x+1] != -1 ) )
       {
-         do
-         {
-            x = ( die->roll( col ) ) - 1;
-            y = ( die->roll( row ) ) - 1;
-            r = r + 1;
-         }
-         while( (int) data[y][x] == 0 );
-
-         data[y][x] = 0;
-
-         if ( y != ( row - 1 ) && ( data[y+1][x] != -1 ) )
-         {
-            (data[y+1][x])++;
-         }
-
-         if ( y != 0  && ( data[y-1][x] != -1 ) )
-         {
-            (data[y-1][x])++;
-         }
-
-         if ( x != ( col - 1 )  && ( data[y][x+1] != -1 ) )
-         {
-            (data[y][x+1])++;
-         }
-
-         if ( x != 0  && ( data[y][x-1] != -1 ) )
-         {
-            (data[y][x-1])++;
-         }
-
-         if ( ( y != ( row - 1 ) ) && ( x != ( col - 1 ) )
-              && ( data[y+1][x+1] != -1 ) )
-         {
-            (data[y+1][x+1])++;
-         }
-
-         if ( ( y != ( row -1 ) ) && ( x != 0 )  && ( data[y+1][x-1] != -1 ) )
-         {
-            (data[y+1][x-1])--;
-         }
-
-         if ( ( y != 0 ) && ( x != ( col -1 ) )  && ( data[y-1][x+1] != -1 ) )
-         {
-            (data[y-1][x+1])--;
-         }
-
-         if ( ( y != 0 ) && ( x != 0 )  && ( data[y-1][x-1] != -1 ) )
-         {
-            (data[y-1][x-1])--;
-         }
-
+         (data[y-1][x+1])++;
       }
+
+      if ( ( y != 0 ) && ( x != 0 )  && ( data[y-1][x-1] != -1 ) )
+      {
+         (data[y-1][x-1])++;
+      } 
    }
 
    cout << "It took " << r << " attempts to place " << n << " mines." << endl;
